@@ -27,7 +27,7 @@ const HeroBanner = () => (
           <Flex alignItems="center" h="100%" ps={{ base: 4, lg: 16 }}>
             <Box>
               <Box borderLeft="8px" borderColor="red.600" ps={5}>
-                <Heading size="4xl" color="gray.800">
+                <Heading size={{ base: "4xl" }} color="gray.800">
                   <Highlight query="SHOES" styles={{ color: "red.600" }}>
                     SPORTS SHOES
                   </Highlight>
