@@ -7,13 +7,21 @@ import {
   InputGroup,
   InputLeftElement,
   useBreakpointValue,
+  Heading,
+  IconButton,
+  Icon,
 } from "@chakra-ui/react";
 import logo from "../assets/logo.png";
 import { SearchIcon } from "@chakra-ui/icons";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import NavbarDrawer from "./NavbarDrawer";
+import { Link } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import ProfilePopover from "./ProfilePopover";
 
 const Navbar = () => {
   const isMobile = useBreakpointValue({ base: true, lg: false });
+  const isLogin = useAuth();
   return (
     <>
       <Box
@@ -31,7 +39,17 @@ const Navbar = () => {
         transform="translate(-50%)"
         bg="white"
       >
-        <Image src={logo} w="45px" h="45px" />
+        {isMobile ? (
+          <Image src={logo} w="45px" h="45px" />
+        ) : (
+          <Link to="/">
+            <HStack>
+              <Image src={logo} w="45px" h="45px" />
+              <Heading size="md">Shoes Ko Po!</Heading>
+            </HStack>
+          </Link>
+        )}
+
         {isMobile ? (
           <>
             <InputGroup>
@@ -48,25 +66,38 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <HStack spacing={6}>
-              <Button colorScheme="red" variant="link">
-                HOME
-              </Button>
-              <Button colorScheme="red" variant="link">
-                SHOP
-              </Button>
-              <Button colorScheme="red" variant="link">
-                BLOG
-              </Button>
-              <Button colorScheme="red" variant="link">
-                CONTACT
-              </Button>
-            </HStack>
+            <InputGroup maxW="65%">
+              <InputLeftElement pointerEvents="none">
+                <SearchIcon color="gray.400" />
+              </InputLeftElement>
+              <Input
+                placeholder="Search for..."
+                variant="filled"
+                rounded="full"
+              />
+            </InputGroup>
             <HStack>
-              <Button size="sm" whiteSpace="nowrap" colorScheme="red">
-                Sign up
-              </Button>
-              <Button size="sm">Login</Button>
+              <Link to="/addtocart">
+                <IconButton
+                  variant="ghost"
+                  aria-label="cart"
+                  icon={<Icon as={AiOutlineShoppingCart} />}
+                />
+              </Link>
+              {!isLogin ? (
+                <HStack>
+                  <Link to="/signup">
+                    <Button size="sm" whiteSpace="nowrap" colorScheme="red">
+                      Sign up
+                    </Button>
+                  </Link>
+                  <Link to="/login">
+                    <Button size="sm">Login</Button>
+                  </Link>
+                </HStack>
+              ) : (
+                <ProfilePopover />
+              )}
             </HStack>
           </>
         )}

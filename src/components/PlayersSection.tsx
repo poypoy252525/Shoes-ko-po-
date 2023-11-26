@@ -7,7 +7,7 @@ import Jordan from "../assets/nba_players/jordan.jpg";
 import PlayersCard from "./PlayersCard";
 import Section from "./Section";
 
-const PlayersBanner = () => {
+const PlayersSection = () => {
   return (
     <Section header="Featured Players" viewMore={false}>
       <Grid
@@ -35,4 +35,4 @@ const PlayersBanner = () => {
   );
 };
 
-export default PlayersBanner;
+export default PlayersSection;

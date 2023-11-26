@@ -12,10 +12,11 @@ import {
 } from "@chakra-ui/react";
 import Banner from "../assets/pngwing.com.png";
 import Section from "./Section";
+import { Link } from "react-router-dom";
 
-const HeroBanner = () => (
-  <Section viewMore={false}>
-    <Box w="100%" pt={16}>
+const HeroSection = () => (
+  <Section viewMore={false} link="none">
+    <Box w="100%">
       <Grid
         templateColumns={
           "repeat(" + useBreakpointValue({ base: 1, lg: 2 }) + ", 1fr)"
@@ -33,13 +34,13 @@ const HeroBanner = () => (
                   </Highlight>
                 </Heading>
                 <Text color="red.400" fontWeight="bold" mt={1}>
-                  Sapatusin ko kayo ng idol mo
-                  {useBreakpointValue({ base: true, lg: false }) && <br />}G ka
-                  ba?
+                  Run anywhere, Comfort everywhere.
                 </Text>
               </Box>
               <Flex mt={10} w="100%" justifyContent="flex-start">
-                <Button colorScheme="red">GET SHOES</Button>
+                <Link to="/products">
+                  <Button colorScheme="red">GET SHOES</Button>
+                </Link>
               </Flex>
             </Box>
           </Flex>
@@ -52,4 +53,4 @@ const HeroBanner = () => (
   </Section>
 );
 
-export default HeroBanner;
+export default HeroSection;

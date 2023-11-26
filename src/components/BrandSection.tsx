@@ -3,7 +3,7 @@ import { SiJordan, SiNike, SiAdidas } from "react-icons/si";
 import BrandCard from "./BrandCard";
 import Section from "./Section";
 
-const BrandBanner = () => {
+const BrandSection = () => {
   return (
     <Section header="Brands">
       <Grid templateColumns="repeat(3, 1fr)" gap={4}>
@@ -21,4 +21,4 @@ const BrandBanner = () => {
   );
 };
 
-export default BrandBanner;
+export default BrandSection;
