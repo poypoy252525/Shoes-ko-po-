@@ -16,6 +16,7 @@ import useAuth from "../hooks/useAuth";
 import CustomBreadcrumb from "../components/CustomBreadcrumb";
 import QuantitySelector from "../components/QuantitySelector";
 import { useState } from "react";
+import Selector from "../components/Selector";
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -27,6 +28,12 @@ const ProductPage = () => {
     { label: "Home", link: "/" },
     { label: "Products", link: "/products" },
     { label: "Shoes", link: "/products/" + id },
+  ];
+  const colors: { label: string; value: string }[] = [
+    { label: "Blue", value: "Blue" },
+    { label: "Black", value: "Black" },
+    { label: "Pink", value: "Pink" },
+    { label: "White", value: "White" },
   ];
   return (
     <Box pt={10}>
@@ -51,12 +58,14 @@ const ProductPage = () => {
                 Size
               </Heading>
               <HStack>
-                <Button size="sm">7</Button>
-                <Button size="sm">8</Button>
-                <Button size="sm">9</Button>
-                <Button size="sm">10</Button>
-                <Button size="sm">11</Button>
-                <Button size="sm">12</Button>
+                <Selector
+                  items={[
+                    { label: "8", value: "8" },
+                    { label: "9", value: "9" },
+                    { label: "10", value: "10" },
+                    { label: "11", value: "11" },
+                  ]}
+                />
               </HStack>
             </Box>
             <Box>
@@ -64,10 +73,7 @@ const ProductPage = () => {
                 Color
               </Heading>
               <HStack>
-                <Button size="sm">Blue</Button>
-                <Button size="sm">Red</Button>
-                <Button size="sm">Green</Button>
-                <Button size="sm">Black</Button>
+                <Selector items={colors} />
               </HStack>
             </Box>
             <Box>
