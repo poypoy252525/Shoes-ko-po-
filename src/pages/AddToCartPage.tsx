@@ -45,7 +45,7 @@ const AddToCartPage = () => {
         <GridItem colSpan={8}>
           <Flex w="100%" justify="space-between" alignItems="center" mb={4}>
             <Heading size="lg">Shopping cart</Heading>
-            <Text color="gray.400">{addToCarts?.length} Items</Text>
+            <Text color="gray.400">{addToCarts?.length} Item(s)</Text>
           </Flex>
           <Divider />
           {!isLoading ? (

@@ -14,12 +14,15 @@ import useProduct from "../hooks/useProduct";
 import useAddToCart from "../hooks/useAddToCart";
 import useAuth from "../hooks/useAuth";
 import CustomBreadcrumb from "../components/CustomBreadcrumb";
+import QuantitySelector from "../components/QuantitySelector";
+import { useState } from "react";
 
 const ProductPage = () => {
   const { id } = useParams();
   const { data: product } = useProduct(parseInt(id ? id : ""));
   const { mutate } = useAddToCart();
   const user = useAuth();
+  const [quantity, setQuantity] = useState<number>(1);
   const breadcrumbItems: BreadcrumbItem[] = [
     { label: "Home", link: "/" },
     { label: "Products", link: "/products" },
@@ -71,11 +74,10 @@ const ProductPage = () => {
               <Heading size="sm" mb={2}>
                 Quantity
               </Heading>
-              <HStack>
-                <Button size="sm">-</Button>
-                <Text>1</Text>
-                <Button size="sm">+</Button>
-              </HStack>
+              <QuantitySelector
+                onSetQuantity={setQuantity}
+                quantity={quantity}
+              />
             </Box>
             <HStack w="100%" justify="flex-start">
               <Button colorScheme="red">Buy now</Button>
@@ -85,7 +87,7 @@ const ProductPage = () => {
                     customerId: user?.customer_id!,
                     id: 0,
                     productId: id!,
-                    quantity: 2,
+                    quantity: quantity,
                   });
                 }}
               >
