@@ -10,8 +10,8 @@ const ProductSection = () => {
   return (
     <Section header="Popular" link="/products">
       <HStack spacing={2} overflowX="auto" py={2}>
-        {slicedProducts?.map((product) => (
-          <ProductCard product={product} />
+        {slicedProducts?.map((product, index) => (
+          <ProductCard key={index} product={product} />
         ))}
       </HStack>
     </Section>

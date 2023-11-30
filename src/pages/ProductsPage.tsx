@@ -50,7 +50,10 @@ const ProductsPage = () => {
             {isMobile ? (
               <FilterDrawer />
             ) : (
-              <Heading size={["sm", "lg"]}>All Shoes</Heading>
+              <Heading size={["sm", "lg"]}>
+                {brands.length || genders.length ? brands.join(", ") : "All"}{" "}
+                Shoes
+              </Heading>
             )}
             <SortByMenu />
           </Flex>

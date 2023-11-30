@@ -3,6 +3,7 @@ import {
   Button,
   Card,
   CardBody,
+  Center,
   Heading,
   Image,
   Stack,
@@ -29,7 +30,9 @@ const ProductCard = ({ product }: Props) => {
       size={isMobile ? "sm" : "md"}
       overflow="hidden"
     >
-      <Image src={useImage(product.image_url)} />
+      <Center w="100%" minH="250px">
+        <Image src={useImage(product.image_url)} />
+      </Center>
       <CardBody>
         <Stack divider={<StackDivider />} spacing={4} h="100%">
           <Box mb="auto">

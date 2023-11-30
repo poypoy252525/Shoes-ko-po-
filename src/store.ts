@@ -7,6 +7,7 @@ interface Query {
   brands: string[];
   addBrand: (brand: string) => void;
   removeBrand: (brand: string) => void;
+  clearBrands: () => void;
 }
 
 const useStore = create<Query>((set) => ({
@@ -19,6 +20,7 @@ const useStore = create<Query>((set) => ({
   addBrand: (brand) => set((store) => ({ brands: [...store.brands, brand] })),
   removeBrand: (brand) =>
     set((store) => ({ brands: store.brands.filter((g) => g !== brand) })),
+  clearBrands: () => set(() => ({ brands: [] })),
 }));
 
 export default useStore;

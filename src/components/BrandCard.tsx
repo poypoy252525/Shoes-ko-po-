@@ -3,6 +3,7 @@ import { IconType } from "react-icons";
 
 interface Props {
   logo: IconType;
+  brand: Brand;
 }
 
 const BrandCard = ({ logo }: Props) => {
