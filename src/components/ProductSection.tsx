@@ -11,18 +11,7 @@ const ProductSection = () => {
     <Section header="Popular" link="/products">
       <HStack spacing={2} overflowX="auto" py={2}>
         {slicedProducts?.map((product) => (
-          <ProductCard
-            product_id={product.product_id}
-            image_url={
-              "http://localhost/shoeskopo/image.php?url=" + product.image_url
-            }
-            key={product.product_id}
-            brand={product.brand}
-            category={product.category}
-            name={product.name}
-            price={product.price}
-            minW="210px"
-          />
+          <ProductCard product={product} />
         ))}
       </HStack>
     </Section>

@@ -67,17 +67,7 @@ const ProductsPage = () => {
             {!isLoading
               ? products?.map((product) => (
                   <GridItem key={product.product_id} minW="auto">
-                    <ProductCard
-                      product_id={product.product_id}
-                      name={product.name}
-                      category={product.category}
-                      price={product.price}
-                      brand={product.brand}
-                      image_url={
-                        "http://localhost/shoeskopo/image.php?url=" +
-                        product.image_url
-                      }
-                    />
+                    <ProductCard product={product} />
                   </GridItem>
                 ))
               : [0, 1, 2, 3, 4, 5].map((item) => (

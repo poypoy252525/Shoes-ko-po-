@@ -9,7 +9,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useProduct from "../hooks/useProduct";
 import useAddToCart from "../hooks/useAddToCart";
 import useAuth from "../hooks/useAuth";
@@ -20,6 +20,7 @@ import Selector from "../components/Selector";
 
 const ProductPage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { data: product } = useProduct(parseInt(id ? id : ""));
   const { mutate } = useAddToCart();
   const user = useAuth();
@@ -27,14 +28,12 @@ const ProductPage = () => {
   const breadcrumbItems: BreadcrumbItem[] = [
     { label: "Home", link: "/" },
     { label: "Products", link: "/products" },
-    { label: "Shoes", link: "/products/" + id },
+    { label: product?.name!, link: "/products/" + id },
   ];
   const colors: { label: string; value: string }[] = [
-    { label: "Blue", value: "Blue" },
-    { label: "Black", value: "Black" },
-    { label: "Pink", value: "Pink" },
-    { label: "White", value: "White" },
+    { label: product?.color!, value: product?.color! },
   ];
+
   return (
     <Box pt={10}>
       <Grid templateColumns="repeat(3, 1fr)" gap={6}>
@@ -73,7 +72,7 @@ const ProductPage = () => {
                 Color
               </Heading>
               <HStack>
-                <Selector items={colors} />
+                <Selector selectedValue={product?.color} items={colors} />
               </HStack>
             </Box>
             <Box>
@@ -89,12 +88,15 @@ const ProductPage = () => {
               <Button colorScheme="red">Buy now</Button>
               <Button
                 onClick={() => {
-                  return mutate({
-                    customerId: user?.customer_id!,
-                    id: 0,
-                    productId: id!,
-                    quantity: quantity,
-                  });
+                  if (user)
+                    return mutate({
+                      customerId: user?.customer_id!,
+                      id: 0,
+                      productId: id!,
+                      quantity: quantity,
+                    });
+
+                  navigate("/login");
                 }}
               >
                 Add to cart

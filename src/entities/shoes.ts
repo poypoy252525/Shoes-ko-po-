@@ -1,4 +1,4 @@
-export interface Shoes {
+interface Shoes {
   product_id: number;
   name: string;
   description: string;

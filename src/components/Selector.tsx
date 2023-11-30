@@ -1,12 +1,18 @@
 import { Button } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Props {
   items: { label: string; value: string }[];
+  selectedValue?: string;
 }
 
-const Selector = ({ items }: Props) => {
-  const [selectedColor, setSelectedColor] = useState<string>("");
+const Selector = ({ items, selectedValue = "NaN" }: Props) => {
+  const [selectedColor, setSelectedColor] = useState<string>(selectedValue);
+
+  useEffect(() => {
+    setSelectedColor(selectedValue);
+  }, [selectedValue]);
+
   return items.map((item, index) => (
     <Button
       key={index}
