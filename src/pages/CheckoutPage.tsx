@@ -112,7 +112,7 @@ const CheckoutPage = () => {
                       ?.reduce(
                         (accumulator, value) =>
                           accumulator + parseInt(value.price) * value.quantity,
-                        0
+                        30
                       )
                       .toLocaleString()}
                   </Text>
