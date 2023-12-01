@@ -3,13 +3,26 @@ import { FormControl, FormLabel, Input } from "@chakra-ui/react";
 interface Props {
   label: string;
   inputType: "email" | "text" | "number";
+  initialValue?: string;
+  disabled?: boolean;
 }
 
-const CustomInputFormControl = ({ label, inputType }: Props) => {
+const CustomInputFormControl = ({
+  label,
+  inputType,
+  initialValue,
+  disabled,
+}: Props) => {
   return (
     <FormControl isRequired>
       <FormLabel>{label}</FormLabel>
-      <Input fontSize="small" type={inputType} placeholder={label} />
+      <Input
+        isDisabled={disabled}
+        value={initialValue}
+        fontSize="small"
+        type={inputType}
+        placeholder={label}
+      />
     </FormControl>
   );
 };

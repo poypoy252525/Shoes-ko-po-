@@ -4,7 +4,7 @@ import {
   Card,
   CardBody,
   Center,
-  Heading,
+   Heading,
   Image,
   Stack,
   StackDivider,

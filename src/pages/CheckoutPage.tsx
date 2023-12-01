@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Card,
   CardBody,
   CardHeader,
@@ -19,6 +20,7 @@ import useAuth from "../hooks/useAuth";
 import useImage from "../hooks/useImage";
 import React from "react";
 import CustomBreadcrumb from "../components/CustomBreadcrumb";
+import PaymentSelector from "../components/PaymentSelector";
 
 const CheckoutPage = () => {
   const user = useAuth();
@@ -38,7 +40,12 @@ const CheckoutPage = () => {
           </Heading>
           <Grid templateColumns="repeat(12, 1fr)" gap={5}>
             <GridItem colSpan={12}>
-              <CustomInputFormControl inputType="email" label="Email" />
+              <CustomInputFormControl
+                initialValue={user?.email}
+                inputType="email"
+                label="Email"
+                disabled
+              />
             </GridItem>
             <GridItem colSpan={6}>
               <CustomInputFormControl inputType="text" label="First name" />
@@ -117,6 +124,9 @@ const CheckoutPage = () => {
                       .toLocaleString()}
                   </Text>
                 </HStack>
+                <Button colorScheme="red" w="100%">
+                  Place order
+                </Button>
               </VStack>
             </CardBody>
           </Card>
@@ -125,6 +135,7 @@ const CheckoutPage = () => {
           <Heading size="lg" mb={5}>
             Payment Method
           </Heading>
+          <PaymentSelector />
         </GridItem>
       </Grid>
     </Container>
