@@ -22,7 +22,9 @@ const PlayersSection = () => {
           </Link>
         </GridItem>
         <GridItem rowSpan={1} colSpan={2}>
-          <PlayersCard picture={Steph} />
+          <Link to="/featured-player/Curry">
+            <PlayersCard picture={Steph} />
+          </Link>
         </GridItem>
         <GridItem rowSpan={1} colSpan={1}>
           <Link to="/featured-player/Kobe">
@@ -35,12 +37,7 @@ const PlayersSection = () => {
           </Link>
         </GridItem>
         <GridItem rowSpan={1} colSpan={2}>
-          <Link to="/featured-player/Jordan">
-            <PlayersCard picture={Durant} />
-          </Link>
-        </GridItem>
-        <GridItem rowSpan={1} colSpan={2}>
-          <Link to="/featured-player/Curry">
+          <Link to="/featured-player/Durant">
             <PlayersCard picture={Durant} />
           </Link>
         </GridItem>
