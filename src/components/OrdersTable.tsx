@@ -34,13 +34,29 @@ const OrdersTableTab = () => {
               <Td>#{order.order_id}</Td>
               <Td>{order.status}</Td>
               <Td>{order.payment_method}</Td>
-              <Td>{order.order_date}</Td>
+              <Td>{formatOrderDate(order.order_date)}</Td>
             </Tr>
           ))}
         </Tbody>
       </Table>
     </TableContainer>
   );
+};
+
+const formatOrderDate = (orderDateStr: string) => {
+  const orderDate = new Date(orderDateStr);
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+  };
+  return new Intl.DateTimeFormat(
+    "en-US",
+    options as Intl.DateTimeFormatOptions
+  ).format(orderDate);
 };
 
 export default OrdersTableTab;
