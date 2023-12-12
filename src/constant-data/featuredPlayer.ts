@@ -78,6 +78,7 @@ Jordan might be just as famous for his Nike shoe the Air Jordan as for his baske
     name: "Stephen Curry",
     description: `Widely regarded as the greatest shooter and one of the greatest players of all time, Curry is credited with revolutionizing the sport by inspiring teams and players to take more three-point shots.[2][3][4][5] He is a four-time NBA champion, a two-time NBA Most Valuable Player (MVP), an NBA Finals MVP, an NBA All-Star Game MVP, a nine-time NBA All-Star, and a nine-time All-NBA selection, including four times on the first team`,
     image_url: curry,
+    trivia: "",
   },
 };
 
