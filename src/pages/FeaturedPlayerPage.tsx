@@ -7,13 +7,13 @@ import {
   Text,
   Image,
 } from "@chakra-ui/react";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import featuredPlayers from "../constant-data/featuredPlayer";
 import CustomBreadcrumb from "../components/CustomBreadcrumb";
 
 const FeaturedPlayerPage = () => {
   const { id } = useParams();
-  if (!id) return "";
+  if (!id) return <Navigate to="/" />;
 
   const player = featuredPlayers[id];
   const breadcrumbItem: BreadcrumbItem[] = [
