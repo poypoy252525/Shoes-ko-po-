@@ -6,6 +6,7 @@ import Kobe from "../assets/nba_players/Kobe.jpg";
 import Jordan from "../assets/nba_players/jordan.jpg";
 import PlayersCard from "./PlayersCard";
 import Section from "./Section";
+import { Link } from "react-router-dom";
 
 const PlayersSection = () => {
   return (
@@ -16,19 +17,32 @@ const PlayersSection = () => {
         gap={4}
       >
         <GridItem rowSpan={2} colSpan={1}>
-          <PlayersCard picture={Lebron} />
+          <Link to="/featured-player/Lebron">
+            <PlayersCard picture={Lebron} />
+          </Link>
         </GridItem>
         <GridItem rowSpan={1} colSpan={2}>
           <PlayersCard picture={Steph} />
         </GridItem>
         <GridItem rowSpan={1} colSpan={1}>
-          <PlayersCard picture={Kobe} />
+          <Link to="/featured-player/Kobe">
+            <PlayersCard picture={Kobe} />
+          </Link>
         </GridItem>
         <GridItem rowSpan={1} colSpan={1}>
-          <PlayersCard picture={Jordan} />
+          <Link to="/featured-player/Jordan">
+            <PlayersCard picture={Jordan} />
+          </Link>
         </GridItem>
         <GridItem rowSpan={1} colSpan={2}>
-          <PlayersCard picture={Durant} />
+          <Link to="/featured-player/Jordan">
+            <PlayersCard picture={Durant} />
+          </Link>
+        </GridItem>
+        <GridItem rowSpan={1} colSpan={2}>
+          <Link to="/featured-player/Curry">
+            <PlayersCard picture={Durant} />
+          </Link>
         </GridItem>
       </Grid>
     </Section>

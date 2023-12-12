@@ -17,6 +17,7 @@ import CustomBreadcrumb from "../components/CustomBreadcrumb";
 import QuantitySelector from "../components/QuantitySelector";
 import { useState } from "react";
 import Selector from "../components/Selector";
+import useImage from "../hooks/useImage";
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -39,19 +40,14 @@ const ProductPage = () => {
       <Grid templateColumns="repeat(3, 1fr)" gap={6}>
         <GridItem colSpan={1}>
           <Box borderRadius={10} overflow="hidden">
-            <Image
-              src={
-                "http://localhost/shoeskopo/image.php?url=" + product?.image_url
-              }
-              maxW="100%"
-            />
+            <Image src={useImage(product?.image_url!)} maxW="100%" />
           </Box>
         </GridItem>
         <GridItem colSpan={2}>
           <CustomBreadcrumb items={breadcrumbItems} />
           <VStack align="flex-start" spacing={4}>
             <Heading>{product?.name}</Heading>
-            <Text>{product?.description}</Text>
+            <Text color="teal">{product?.description}</Text>
             <Box>
               <Heading size="sm" mb={2}>
                 Size
@@ -85,16 +81,28 @@ const ProductPage = () => {
               />
             </Box>
             <HStack w="100%" justify="flex-start">
-              <Button colorScheme="red">Buy now</Button>
+              <Button
+                colorScheme="red"
+                onClick={() =>
+                  navigate(
+                    `/addtocart/checkout/${encodeURIComponent(
+                      JSON.stringify({ product_id: id, quantity })
+                    )}`
+                  )
+                }
+              >
+                Buy now
+              </Button>
               <Button
                 onClick={() => {
-                  if (user)
+                  if (user) {
                     return mutate({
-                      customerId: user?.customer_id!,
+                      customerId: user?.customer_id.toString()!,
                       id: 0,
                       productId: id!,
                       quantity: quantity,
                     });
+                  }
 
                   navigate("/login");
                 }}

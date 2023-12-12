@@ -25,16 +25,15 @@ const Navbar = () => {
   return (
     <>
       <Box
-        w={useBreakpointValue({ base: "100%", lg: "90%" })}
-        h="50px"
+        w="100%"
+        h="55px"
         display="flex"
         justifyContent="space-between"
         alignItems="center"
         px={5}
         boxShadow="md"
-        rounded="md"
         position="fixed"
-        top={useBreakpointValue({ base: 0, lg: 5 })}
+        top={0}
         left="50%"
         transform="translate(-50%)"
         bg="white"
@@ -66,17 +65,7 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <InputGroup maxW="65%">
-              <InputLeftElement pointerEvents="none">
-                <SearchIcon color="gray.400" />
-              </InputLeftElement>
-              <Input
-                placeholder="Search for..."
-                variant="filled"
-                rounded="full"
-              />
-            </InputGroup>
-            <HStack>
+            <HStack spacing={4}>
               <Link to="/addtocart">
                 <IconButton
                   variant="ghost"
@@ -102,7 +91,6 @@ const Navbar = () => {
           </>
         )}
       </Box>
-      <Box my={5} h="50px"></Box>
     </>
   );
 };

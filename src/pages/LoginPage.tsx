@@ -26,7 +26,9 @@ const LoginPage = () => {
         <Card w="350px">
           <CardBody>
             <VStack align="center">
-              <Image src={logo} w="120px" />
+              <Link to="/">
+                <Image src={logo} w="120px" />
+              </Link>
               <Input
                 {...register("email", { required: true })}
                 placeholder="Email"

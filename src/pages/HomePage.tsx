@@ -1,5 +1,4 @@
 import BrandSection from "../components/BrandSection";
-import FooterSection from "../components/FooterSection";
 import HeroSection from "../components/HeroSection";
 import PlayersSection from "../components/PlayersSection";
 import ProductSection from "../components/ProductSection";
@@ -11,7 +10,6 @@ const HomePage = () => {
       <PlayersSection />
       <BrandSection />
       <ProductSection />
-      <FooterSection />
     </>
   );
 };

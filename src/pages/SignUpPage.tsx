@@ -31,7 +31,9 @@ const SignUpPage = () => {
         <Card w="350px">
           <CardBody>
             <VStack align="center">
-              <Image src={logo} w="120px" />
+              <Link to="/">
+                <Image src={logo} w="120px" />
+              </Link>
               <Input placeholder="Email" type="email" {...register("email")} />
               <Input
                 placeholder="Password"

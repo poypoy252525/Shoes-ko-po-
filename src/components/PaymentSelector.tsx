@@ -1,16 +1,24 @@
 import { Button, HStack, Image } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import gcashLogo from "../assets/GCash-Logo-PNG_010.png";
 import paypalLogo from "../assets/PayPal-Logo-PNG_018.png";
 import codLogo from "../assets/—Pngtree—cash on delivery bagde olshop_6359688.png";
 
-const PaymentSelector = () => {
-  const [selectedPayment, setSelectedPayment] = useState<string>("gcash");
+interface Props {
+  setValue: (value: string) => void;
+}
+
+const PaymentSelector = ({ setValue }: Props) => {
+  const [selectedPayment, setSelectedPayment] = useState<string>("Gcash");
   const items = [
-    { logo: gcashLogo, value: "gcash" },
-    { logo: paypalLogo, value: "paypal" },
-    { logo: codLogo, value: "cod" },
+    { logo: gcashLogo, value: "Gcash" },
+    { logo: paypalLogo, value: "Paypal" },
+    { logo: codLogo, value: "Cash on delivery" },
   ];
+
+  useEffect(() => {
+    setValue(selectedPayment);
+  }, [selectedPayment]);
 
   return (
     <HStack spacing={3}>

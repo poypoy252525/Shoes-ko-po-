@@ -41,13 +41,14 @@ const ProfilePopover = () => {
           </Center>
         </PopoverHeader>
         <PopoverBody px={0}>
-          <VStack>
+          <VStack spacing={0}>
             <Button
               w="100%"
               size="sm"
               variant="ghost"
               justifyContent="flex-start"
               leftIcon={<Icon as={FiUser} />}
+              onClick={() => navigate("/profile")}
             >
               Profile
             </Button>

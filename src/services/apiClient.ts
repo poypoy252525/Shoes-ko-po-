@@ -26,6 +26,9 @@ class APIClient {
   post = <T>(data: T) =>
     axiosInstance.post(this.endpoint, data).then((res) => res.data);
 
+  put = (data: any) =>
+    axiosInstance.put(this.endpoint, data).then((res) => res.data);
+
   delete = (id: number) =>
     axiosInstance
       .delete(this.endpoint, { params: { id } })

@@ -17,26 +17,31 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import CustomInputFormControl from "../components/CustomInputFormControl";
-import useFetchAddToCart from "../hooks/useFetchAddToCart";
 import useAuth from "../hooks/useAuth";
 import useImage from "../hooks/useImage";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import CustomBreadcrumb from "../components/CustomBreadcrumb";
 import PaymentSelector from "../components/PaymentSelector";
 import useAddOrder from "../hooks/useAddOrder";
 import { useForm } from "react-hook-form";
-import { Navigate, useNavigate } from "react-router-dom";
-import useDeleteAddToCarts from "../hooks/useDeleteAddToCarts";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
+import useProduct from "../hooks/useProduct";
 import { EditIcon } from "@chakra-ui/icons";
-import useUpdateCustomer from "../hooks/useUpdateCustomer";
 import useCustomer from "../hooks/useCustomer";
+import useUpdateCustomer from "../hooks/useUpdateCustomer";
 
-const CheckoutPage = () => {
+const BuyNowPage = () => {
   const user = useAuth();
   if (!user?.customer_id) return <Navigate to="/login" />;
 
+  const { order } = useParams();
+  const orderData: { product_id: number; quantity: number } = JSON.parse(
+    order!
+  );
+
   const { data: customer } = useCustomer(user.customer_id);
-  const { data: carts } = useFetchAddToCart(user?.customer_id!);
+  const { data: product } = useProduct(orderData.product_id!);
+
   const { mutate } = useAddOrder();
   const { mutate: mutateCustomer } = useUpdateCustomer();
   const { handleSubmit, setValue } = useForm<Order | Customer>();
@@ -53,29 +58,28 @@ const CheckoutPage = () => {
       status: "Processing",
       order_id: "",
       payment_method: "",
-      order_items:
-        carts?.map((cart) => ({
+      order_items: [
+        {
           order_id: "",
           order_item_id: "",
-          product_id: cart.product_id,
-          quantity: cart.quantity,
-          subtotal: parseFloat(cart.price),
-        })) || [],
+          product_id: product?.product_id!,
+          quantity: orderData.quantity,
+          subtotal: orderData.quantity * parseFloat(product?.price!),
+        },
+      ],
     };
     setValue("order_items", order.order_items);
     setValue("customer_id", user?.customer_id!);
     setValue("order_date", order.order_date);
     setValue("status", order.status);
-  }, [carts]);
+  }, [product, orderData]);
 
-  const { mutate: mutateAddToCart } = useDeleteAddToCarts();
   const navigate = useNavigate();
 
   return (
     <form
       onSubmit={handleSubmit((order) => {
         mutate(order as Order);
-        mutateAddToCart(order.customer_id);
         mutateCustomer(order as Customer);
       })}
     >
@@ -150,37 +154,33 @@ const CheckoutPage = () => {
               </CardHeader>
               <CardBody>
                 <Grid templateColumns="repeat(12, 1fr)" columnGap={6} w="100%">
-                  {carts?.map((cart, index) => (
-                    <React.Fragment key={index}>
-                      <GridItem colSpan={2}>
-                        <Box display="flex" alignItems="center" h="100%">
-                          <Image w="100%" src={useImage(cart.image_url)} />
-                        </Box>
-                      </GridItem>
-                      <GridItem colSpan={5}>
-                        <Box display="flex" alignItems="center" h="100%">
-                          <Text fontSize="small">{cart.name}</Text>
-                        </Box>
-                      </GridItem>
-                      <GridItem colSpan={2}>
-                        <Box display="flex" alignItems="center" h="100%">
-                          <Text fontSize="small">x{cart.quantity}</Text>
-                        </Box>
-                      </GridItem>
-                      <GridItem colSpan={3}>
-                        <Box
-                          display="flex"
-                          alignItems="center"
-                          justifyContent="flex-end"
-                          h="100%"
-                        >
-                          <Text fontWeight="semibold">
-                            ₱{parseFloat(cart.price).toLocaleString()}
-                          </Text>
-                        </Box>
-                      </GridItem>
-                    </React.Fragment>
-                  ))}
+                  <GridItem colSpan={2}>
+                    <Box display="flex" alignItems="center" h="100%">
+                      <Image w="100%" src={useImage(product?.image_url!)} />
+                    </Box>
+                  </GridItem>
+                  <GridItem colSpan={5}>
+                    <Box display="flex" alignItems="center" h="100%">
+                      <Text fontSize="small">{product?.name}</Text>
+                    </Box>
+                  </GridItem>
+                  <GridItem colSpan={2}>
+                    <Box display="flex" alignItems="center" h="100%">
+                      <Text fontSize="small">x{orderData.quantity}</Text>
+                    </Box>
+                  </GridItem>
+                  <GridItem colSpan={3}>
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="flex-end"
+                      h="100%"
+                    >
+                      <Text fontWeight="semibold">
+                        ₱{parseFloat(product?.price!).toLocaleString()}
+                      </Text>
+                    </Box>
+                  </GridItem>
                 </Grid>
                 <Divider my={4} />
                 <VStack spacing={2} w="100%">
@@ -196,17 +196,12 @@ const CheckoutPage = () => {
                     </Text>
                     <Text fontWeight="semibold">
                       ₱
-                      {carts
-                        ?.reduce(
-                          (accumulator, value) =>
-                            accumulator +
-                            parseInt(value.price) * value.quantity,
-                          30
-                        )
-                        .toLocaleString()}
+                      {(
+                        orderData.quantity * parseFloat(product?.price!)
+                      ).toLocaleString()}
                     </Text>
                   </HStack>
-                  <Button colorScheme="red" w="100%" type="submit">
+                  <Button type="submit" colorScheme="red" w="100%" mt={4}>
                     Place order
                   </Button>
                 </VStack>
@@ -227,4 +222,4 @@ const CheckoutPage = () => {
   );
 };
 
-export default CheckoutPage;
+export default BuyNowPage;
