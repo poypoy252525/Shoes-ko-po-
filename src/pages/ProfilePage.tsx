@@ -19,6 +19,7 @@ import useAuth from "../hooks/useAuth";
 import { Navigate } from "react-router-dom";
 import CustomBreadcrumb from "../components/CustomBreadcrumb";
 import useOrders from "../hooks/useOrders";
+import useTotalSpent from "../hooks/useTotalSpent";
 
 const ProfilePage = () => {
   const user = useAuth();
@@ -31,6 +32,8 @@ const ProfilePage = () => {
     { label: "Home", link: "/" },
     { label: "Profile", link: "/profile" },
   ];
+
+  const { data } = useTotalSpent(user.customer_id);
 
   return (
     <Box>
@@ -61,7 +64,7 @@ const ProfilePage = () => {
                       Total Spent
                     </Text>
                     <Text fontWeight="bold" fontSize="lg" color="gray.600">
-                      {/* {orders?.reduce((acc, value) => acc + value., 0)} */}
+                      ₱{parseFloat(data?.total_spent!).toLocaleString()}
                     </Text>
                   </GridItem>
                   <GridItem>

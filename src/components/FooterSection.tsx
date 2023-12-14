@@ -58,7 +58,7 @@ export default function FooterSection() {
             <Box as="a" href={"#"}>
               Features
             </Box>
-            <Box as="a" href={"#"}>
+            {/* <Box as="a" href={"#"}>
               Tutorials
             </Box>
             <Box as="a" href={"#"}>
@@ -66,61 +66,61 @@ export default function FooterSection() {
             </Box>
             <Box as="a" href={"#"}>
               Releases
-            </Box>
+            </Box> */}
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Company</ListHeader>
             <Box as="a" href={"#"}>
               About
             </Box>
-            <Box as="a" href={"#"}>
+            {/* <Box as="a" href={"#"}>
               Press
             </Box>
             <Box as="a" href={"#"}>
               Careers
-            </Box>
+            </Box> */}
             <Box as="a" href={"#"}>
               Contact
             </Box>
-            <Box as="a" href={"#"}>
+            {/* <Box as="a" href={"#"}>
               Partners
-            </Box>
+            </Box> */}
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Support</ListHeader>
-            <Box as="a" href={"#"}>
+            {/* <Box as="a" href={"#"}>
               Help Center
-            </Box>
+            </Box> */}
             <Box as="a" href={"#"}>
               Terms of Service
             </Box>
             <Box as="a" href={"#"}>
               Legal
             </Box>
-            <Box as="a" href={"#"}>
+            {/* <Box as="a" href={"#"}>
               Privacy Policy
             </Box>
             <Box as="a" href={"#"}>
               Status
-            </Box>
+            </Box> */}
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Follow Us</ListHeader>
             <Box as="a" href={"#"}>
               Facebook
             </Box>
-            <Box as="a" href={"#"}>
+            {/* <Box as="a" href={"#"}>
               Twitter
             </Box>
             <Box as="a" href={"#"}>
               Dribbble
-            </Box>
+            </Box> */}
             <Box as="a" href={"#"}>
               Instagram
             </Box>
-            <Box as="a" href={"#"}>
+            {/* <Box as="a" href={"#"}>
               LinkedIn
-            </Box>
+            </Box> */}
           </Stack>
         </SimpleGrid>
       </Container>

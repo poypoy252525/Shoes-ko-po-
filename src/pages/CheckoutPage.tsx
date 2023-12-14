@@ -31,9 +31,15 @@ import { EditIcon } from "@chakra-ui/icons";
 import useUpdateCustomer from "../hooks/useUpdateCustomer";
 import useCustomer from "../hooks/useCustomer";
 
+export const areAllPropertiesNotNull = (obj: Object): boolean => {
+  return Object.values(obj).every((value) => value !== null);
+};
+
 const CheckoutPage = () => {
   const user = useAuth();
   if (!user?.customer_id) return <Navigate to="/login" />;
+
+  if (!areAllPropertiesNotNull(user)) return <Navigate to="/profile" />;
 
   const { data: customer } = useCustomer(user.customer_id);
   const { data: carts } = useFetchAddToCart(user?.customer_id!);

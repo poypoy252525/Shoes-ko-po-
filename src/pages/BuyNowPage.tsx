@@ -29,10 +29,13 @@ import useProduct from "../hooks/useProduct";
 import { EditIcon } from "@chakra-ui/icons";
 import useCustomer from "../hooks/useCustomer";
 import useUpdateCustomer from "../hooks/useUpdateCustomer";
+import { areAllPropertiesNotNull } from "./CheckoutPage";
 
 const BuyNowPage = () => {
   const user = useAuth();
   if (!user?.customer_id) return <Navigate to="/login" />;
+
+  if (!areAllPropertiesNotNull(user)) return <Navigate to="/profile" />;
 
   const { order } = useParams();
   const orderData: { product_id: number; quantity: number } = JSON.parse(
